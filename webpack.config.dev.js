@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 //Aqui en el objeto export es donde se agregan las configuraciones
 /** @type {import('webpack').Configuration} */
@@ -15,6 +16,7 @@ module.exports = {
     clean: true
   },
   mode: 'development',
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js'],
     alias: {
@@ -67,7 +69,8 @@ module.exports = {
         }
       ]
     }),
-    new Dotenv()
+    new Dotenv(),
+    new BundleAnalyzerPlugin()
   ],
   devServer: {
     static: path.join(__dirname, 'dist'),
